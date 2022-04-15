@@ -27,7 +27,7 @@ include('includes/header.php');
     <div class="container py-lg-5 py-md-4">
       <h3 class="hny-title mb-lg-5 mb-4">Membership Application Form</h3>
       <div class="contacts12-main mb-5">
-        <form action="server/become" method="post">
+        <form action="server/register" method="post">
           <div class="main-input">
             Personnal Information
             <div class="d-grid">
@@ -66,16 +66,17 @@ include('includes/header.php');
             <textarea class="contact-textarea" name="businessAddress" id="businessAddress"
               placeholder="Business Address" required></textarea>
             <div class="d-grid">
-              <!-- <select class="form-control">
-                <option value="cat">Select LGA</option>
-                <option value="cat">North</option>
-                <option value="cat">South</option>
-              </select> -->
               <select class="form-control" name="state">
                 <option value="state">Select State</option>
                 <option value="abia">Abia</option>
                 <option value="adamawa">Adamawa</option>
               </select>
+              <select class="form-control" name="lga">
+                <option value="">Select LGA</option>
+                <option value="north">North</option>
+                <option value="south">South</option>
+              </select>
+              
             </div>
             <div class="d-grid">
               <select class="form-control" name="yearsofexperience">
@@ -110,7 +111,7 @@ include('includes/header.php');
           </div>
 
           <div class="text-right">
-            <button class="btn btn-style btn-secondary btn-contact">Register</button>
+            <button class="btn btn-style btn-secondary btn-contact" name="register" type="submit">Register</button>
           </div>
         </form>
       </div>
@@ -121,15 +122,70 @@ include('includes/header.php');
 
   <!--/w3l-footer-29-main-->
   <!--//w3l-bottom-->
-
-  <!--/w3l-footer-29-main-->
   <?php
   include('includes/footer.php');
   ?>
+  <!--/w3l-footer-29-main-->
+  
   <!-- //footer-29 block -->
-  <?php
-  include('includes/scripts.php');
-  ?>
+  <!-- disable body scroll which navbar is in active -->
+  <script>
+    $(function () {
+      $('.navbar-toggler').click(function () {
+        $('body').toggleClass('noscroll');
+      })
+    });
+  </script>
+  <!-- disable body scroll which navbar is in active -->
+
+  <!-- Template JavaScript -->
+  <script src="assets/js/jquery-3.3.1.min.js"></script>
+  <script src="assets/js/theme-change.js"></script>
+  <!--/MENU-JS-->
+  <script>
+    $(window).on("scroll", function () {
+      var scroll = $(window).scrollTop();
+
+      if (scroll >= 80) {
+        $("#site-header").addClass("nav-fixed");
+      } else {
+        $("#site-header").removeClass("nav-fixed");
+      }
+    });
+
+    //Main navigation Active Class Add Remove
+    $(".navbar-toggler").on("click", function () {
+      $("header").toggleClass("active");
+    });
+    $(document).on("ready", function () {
+      if ($(window).width() > 991) {
+        $("header").removeClass("active");
+      }
+      $(window).on("resize", function () {
+        if ($(window).width() > 991) {
+          $("header").removeClass("active");
+        }
+      });
+    });
+
+    // Password Confirm
+    var password = document.getElementById("password")
+      , confirm_password = document.getElementById("cpassword");
+
+    function validatePassword() {
+      if (password.value != confirm_password.value) {
+        confirm_password.setCustomValidity("Passwords Don't Match");
+      } else {
+        confirm_password.setCustomValidity('');
+      }
+    }
+
+    password.onchange = validatePassword;
+    confirm_password.onkeyup = validatePassword;
+  </script>
+  <!--//MENU-JS-->
+
+  <script src="assets/js/bootstrap.min.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script>
     $(document).on('input','#email',function(e){
@@ -158,3 +214,9 @@ include('includes/header.php');
       });
     }
   </script>
+
+</body>
+
+</html>
+  
+  

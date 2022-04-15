@@ -11,5 +11,6 @@
   <!-- google fonts -->
   <!-- Template CSS -->
   <link rel="stylesheet" href="assets/css/style-liberty.css">
+  <link rel="stylesheet" href="assets/css/custom.css">
   <!-- Template CSS -->
 </head>
