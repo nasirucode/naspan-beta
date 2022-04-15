@@ -47,6 +47,23 @@
             <li class="nav-item">
               <a class="nav-link" href="contact">Contact</a>
             </li>
+            <?php
+            if(isset($_SESSION['login']))
+            {
+            ?>
+             <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
+                aria-haspopup="true" aria-expanded="false">
+                <?php echo $_SESSION['fname'];?> <span class="fa fa-angle-down"></span>
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <a class="dropdown-item" href="profile">Profile</a>
+                <a class="dropdown-item" href="server/logout">Logout</a>
+              </div>
+            </li>
+            <?php
+            }else{
+            ?>
             <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
@@ -63,6 +80,7 @@
         <div class="d-lg-block d-none">
           <a href="become" class="btn btn-style btn-secondary ml-lg-3">Become a Member</a>
         </div>
+        <?php } ?>
         <!-- toggle switch for light and dark theme -->
         <div class="mobile-position">
           <nav class="navigation">

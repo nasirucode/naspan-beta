@@ -324,7 +324,7 @@
               <div class="sidebar-widget sidebar-blog-category">
 
               <div class="textwidget mx-auto text-center">
-                <a href="#"> <img class="rounded-circle align-center img-fluid" src="assets/images/c1.jpg" alt="user_logo"></a>
+                <a href="#"> <img class="rounded-circle align-center img-fluid" src="assets/images/naspan_user.jpg" alt="user_logo" width="100px"></a>
                        <div class="sidebar-title">
                         <h4 class="mb-2 mt-3">Admin Admin</h4>
                       </div>

@@ -2,6 +2,7 @@
 session_start();
 include('includes/config.php');
 include('includes/header.php');
+include('server/login.php');
 ?>
 <body>
   <!--header-->
@@ -53,12 +54,12 @@ include('includes/header.php');
                                 <span class="checkmark"></span>
                             </label> -->
                         </div>
-                        <div class="w-50 text-md-right" style="color: green;">
-                            <a href="#">Forgot Password</a>
+                        <div class="w-50 text-md-right" >
+                            <a href="#" style="color: green;">Forgot Password</a>
                         </div>
                     </div>
                 </form>
-                <p class="text-center" style="color: green;">Not a member? <a href="become">Become a member</a></p>
+                <p class="text-center" style="">Not a member? <a href="become" style="color: green;">Become a member</a></p>
             </div>
         </div>
     </div>

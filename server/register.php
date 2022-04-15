@@ -23,7 +23,7 @@ if(isset($_POST['register']))
     $query=mysqli_query($con,"insert into tblmember(Firstname,Lastname,PhoneNumber,Email,Gender,Password,MaritalStatus,ResidentialAddress,BusinessAddress,YearsOfExperience,state,lga,MemberTypeId) values('$fname','$lname','$phone','$email','$gender','$password','$mstatus','$residentialAddress','$businessAddress','$yearsofexperience','$state','$lga', 1)");
     if($query)
     {
-    echo "<script type='text/javascript'> document.location = '../index'; </script>";
+    echo "<script type='text/javascript'> document.location = '../signin'; </script>";
     }
     else{
     echo "<script type='text/javascript'> alert("+mysqli_error($con);+") </script>";
