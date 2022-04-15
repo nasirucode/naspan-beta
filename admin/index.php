@@ -1,6 +1,6 @@
 <?php
- session_start();
- ?>
+include('server/login.php');
+?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -22,7 +22,7 @@
         <img src="images/naspan_logo.jpg" alt="Naspan logo"  style="border-radius: 50px;" height="100">
       </div>
       <div class="login-box">
-        <form class="login-form" action="server/login">
+        <form class="login-form" action="server/login" method="post">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
           <div class="form-group">
             <label class="control-label">EMAIL/USERNAME</label>

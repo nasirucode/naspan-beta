@@ -30,4 +30,11 @@ echo "<script>alert('User not registered with us');</script>";
   }
  
 }
+
+if(isset($_SESSION['login']))
+  {
+    echo "<script type='text/javascript'> document.location = 'dashboard'; </script>";
+  }else{
+    echo "<script type='text/javascript'> document.location = 'index'; </script>";
+  }
 ?>
