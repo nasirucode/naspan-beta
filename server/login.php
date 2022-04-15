@@ -19,7 +19,7 @@ $hashpassword=($num['Password']); // Hashed password fething from database
 if ($password == $hashpassword) {
 $_SESSION['login']=$_POST['email'];
 $_SESSION['fname'] = $num['Firstname'];
-    echo "<script type='text/javascript'> document.location = '../index'; </script>";
+    echo "<script type='text/javascript'> document.location = '../member_dashboard'; </script>";
   } else {
     echo "<script>alert('Wrong Password');</script>";
   }
@@ -34,7 +34,5 @@ echo "<script>alert('User not registered with us');</script>";
 if(isset($_SESSION['login']))
   {
     echo "<script type='text/javascript'> document.location = 'dashboard'; </script>";
-  }else{
-    echo "<script type='text/javascript'> document.location = 'index'; </script>";
   }
 ?>

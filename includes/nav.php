@@ -54,9 +54,10 @@
              <li class="nav-item dropdown">
               <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button" data-toggle="dropdown"
                 aria-haspopup="true" aria-expanded="false">
-                <?php echo $_SESSION['fname'];?> <span class="fa fa-angle-down"></span>
+                <img class="rounded-circle align-center img-fluid" src="assets/images/naspan_user.jpg" alt="user_logo" width="50px"><?php echo $_SESSION['fname'];?> <span class="fa fa-angle-down"></span>
               </a>
               <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
+                <a class="dropdown-item" href="member_dashboard">Dashboard</a>
                 <a class="dropdown-item" href="profile">Profile</a>
                 <a class="dropdown-item" href="server/logout">Logout</a>
               </div>

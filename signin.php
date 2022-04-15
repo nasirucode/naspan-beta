@@ -1,8 +1,11 @@
 <?php 
 session_start();
-include('includes/config.php');
 include('includes/header.php');
-include('server/login.php');
+if(isset($_SESSION['login']))
+  {
+    echo "<script type='text/javascript'> document.location = 'member_dashboard'; </script>";
+  }
+// include('server/login.php');
 ?>
 <body>
   <!--header-->

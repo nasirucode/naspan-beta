@@ -17,7 +17,7 @@ if($num>0)
 $hashpassword=$num['AdminPassword']; // Hashed password fething from database
 //verifying Password
 if (password_verify($password, $hashpassword)) {
-$_SESSION['login']=$_POST['username'];
+$_SESSION['adminlogin']=$_POST['username'];
     echo "<script type='text/javascript'> document.location = '../dashboard'; </script>";
   } else {
 echo "<script>alert('Wrong Password');</script>";
@@ -30,11 +30,4 @@ echo "<script>alert('User not registered with us');</script>";
   }
  
 }
-
-if(isset($_SESSION['login']))
-  {
-    echo "<script type='text/javascript'> document.location = 'dashboard'; </script>";
-  }else{
-    echo "<script type='text/javascript'> document.location = 'index'; </script>";
-  }
 ?>

@@ -1,7 +1,14 @@
 <?php
 session_start();
 include('includes/header.php');
+include('includes/config.php');
+error_reporting(0);
+if(strlen($_SESSION['adminlogin'])==0)
+  { 
+header('location:index.php');
+}
 ?>
+
   <body class="app sidebar-mini">
     <!-- Navbar-->
     <?php
@@ -26,8 +33,11 @@ include('includes/header.php');
         <div class="col-md-6 col-lg-3">
           <div class="widget-small primary coloured-icon"><i class="icon fa fa-users fa-3x"></i>
             <div class="info">
-              <h4>New Members</h4>
-              <p><b>5</b></p>
+              <h4>Total Members</h4>
+              <?php $query=mysqli_query($con,"select * from tblmember");
+                $countmembers=mysqli_num_rows($query);
+              ?>
+              <p><b><?php echo htmlentities($countmembers);?></b></p>
             </div>
           </div>
         </div>
