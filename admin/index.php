@@ -1,3 +1,6 @@
+<?php
+ session_start();
+ ?>
 <!DOCTYPE html>
 <html>
   <head>
@@ -19,15 +22,15 @@
         <img src="images/naspan_logo.jpg" alt="Naspan logo"  style="border-radius: 50px;" height="100">
       </div>
       <div class="login-box">
-        <form class="login-form" action="dashboard.html">
+        <form class="login-form" action="server/login">
           <h3 class="login-head"><i class="fa fa-lg fa-fw fa-user"></i>SIGN IN</h3>
           <div class="form-group">
             <label class="control-label">EMAIL/USERNAME</label>
-            <input class="form-control" type="text" placeholder="Email" autofocus>
+            <input class="form-control" type="text" name="username" placeholder="Email" autofocus>
           </div>
           <div class="form-group">
             <label class="control-label">PASSWORD</label>
-            <input class="form-control" type="password" placeholder="Password">
+            <input class="form-control" type="password" name="password" placeholder="Password">
           </div>
           <div class="form-group">
             <div class="utility">
@@ -40,7 +43,7 @@
             </div>
           </div>
           <div class="form-group btn-container">
-            <button class="btn btn-primary btn-block"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
+            <button class="btn btn-primary btn-block" type="submit" name="login"><i class="fa fa-sign-in fa-lg fa-fw"></i>SIGN IN</button>
           </div>
         </form>
         <form class="forget-form" action="index.html">
