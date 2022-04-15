@@ -20,12 +20,12 @@
     <header id="site-header" class="fixed-top">
         <div class="container">
             <nav class="navbar navbar-expand-lg stroke">
-                <h1><a class="navbar-brand mr-lg-5" href="index.html">
+                <h1><a class="navbar-brand mr-lg-5" href="index">
                         <img src="assets/images/naspan_logo.jpg" style="height: 40px;">
                         NAS<span>PAN</span>
                     </a></h1>
                 <!-- if logo is image enable this   
-      <a class="navbar-brand" href="#index.html">
+      <a class="navbar-brand" href="#index">
           <img src="image-path" alt="Your logo" title="Your logo" style="height:35px;" />
       </a> -->
                 <button class="navbar-toggler  collapsed bg-gradient" type="button" data-toggle="collapse"
@@ -39,7 +39,7 @@
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
                     <ul class="navbar-nav ml-auto">
                         <li class="nav-item">
-                            <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+                            <a class="nav-link" href="index">Home <span class="sr-only">(current)</span></a>
                         </li>
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
@@ -47,10 +47,10 @@
                                 About<span class="fa fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <a class="dropdown-item" href="about.html">About Us</a>
-                                <a class="dropdown-item" href="industry_overview.html">Industry Overview</a>
-                                <a class="dropdown-item" href="executives.html">Executive Members</a>
-                                <a class="dropdown-item" href="strategic_focus.html">Strategic Focus</a>
+                                <a class="dropdown-item" href="about">About Us</a>
+                                <a class="dropdown-item" href="industry_overview">Industry Overview</a>
+                                <a class="dropdown-item" href="executives">Executive Members</a>
+                                <a class="dropdown-item" href="strategic_focus">Strategic Focus</a>
                             </div>
                         </li>
                         <li class="nav-item dropdown">
@@ -59,12 +59,12 @@
                                 Media <span class="fa fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <a class="dropdown-item" href="blog.html">News & Event</a>
-                                <a class="dropdown-item" href="gallery.html">Gallery</a>
+                                <a class="dropdown-item" href="blog">News & Event</a>
+                                <a class="dropdown-item" href="gallery">Gallery</a>
                             </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="contact.html">Contact</a>
+                            <a class="nav-link" href="contact">Contact</a>
                         </li>
                         <li class="nav-item active dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown1" role="button"
@@ -72,15 +72,15 @@
                                 Member Area <span class="fa fa-angle-down"></span>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="navbarDropdown1">
-                                <a class="dropdown-item" href="signin.html">Sign In</a>
-                                <a class="dropdown-item" href="become.html">Register</a>
-                                <a class="dropdown-item" href="membership.html">Membership</a>
+                                <a class="dropdown-item" href="signin">Sign In</a>
+                                <a class="dropdown-item" href="become">Register</a>
+                                <a class="dropdown-item" href="membership">Membership</a>
                             </div>
                         </li>
                     </ul>
                 </div>
                 <div class="d-lg-block d-none">
-                    <a href="become.html" class="btn btn-style btn-secondary ml-lg-3">Become a Member</a>
+                    <a href="become" class="btn btn-style btn-secondary ml-lg-3">Become a Member</a>
                 </div>
                 <!-- toggle switch for light and dark theme -->
                 <div class="mobile-position">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                 </form>
-                <p class="text-center">Not a member? <a href="become.html">Become a member</a></p>
+                <p class="text-center">Not a member? <a href="become">Become a member</a></p>
             </div>
         </div>
     </div>
