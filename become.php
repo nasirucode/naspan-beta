@@ -27,7 +27,7 @@ include('includes/header.php');
     <div class="container py-lg-5 py-md-4">
       <h3 class="hny-title mb-lg-5 mb-4">Membership Application Form</h3>
       <div class="contacts12-main mb-5">
-        <form action="https://sendmail.w3layouts.com/submitForm" method="post">
+        <form action="server/become" method="post">
           <div class="main-input">
             Personnal Information
             <div class="d-grid">
@@ -41,19 +41,22 @@ include('includes/header.php');
                 <div id="emailStatus"></div>
             </div>
             <div class="d-grid">
-              <select class="form-control">
-                <option value="cat">Select Gender</option>
-                <option value="cat">Option one</option>
-                <option value="cat">Option one</option>
+              <select class="form-control" name="gender">
+                <option value="">Select Gender</option>
+                <option value="male">Male</option>
+                <option value="female">Female</option>
               </select>
               <input type="password" name="password" id="password" placeholder="Password" class="contact-input"
                 required />
             </div>
             <div class="d-grid">
-              <select class="form-control">
-                <option value="cat">Select Marital Status</option>
-                <option value="cat">Single</option>
-                <option value="cat">Married</option>
+              <select class="form-control" name="mstatus">
+                <option value="">Select Marital Status</option>
+                <option value="single">Single</option>
+                <option value="married">Married</option>
+                <option value="divorce">Divorced</option>
+                <option value="widow">Widow</option>
+                <option value="widower">Widower</option>
               </select>
               <input type="password" name="cpassword" id="cpassword" placeholder="Confirm Password"
                 class="contact-input" required />
@@ -63,25 +66,24 @@ include('includes/header.php');
             <textarea class="contact-textarea" name="businessAddress" id="businessAddress"
               placeholder="Business Address" required></textarea>
             <div class="d-grid">
-              <select class="form-control">
+              <!-- <select class="form-control">
                 <option value="cat">Select LGA</option>
                 <option value="cat">North</option>
                 <option value="cat">South</option>
+              </select> -->
+              <select class="form-control" name="state">
+                <option value="state">Select State</option>
+                <option value="abia">Abia</option>
+                <option value="adamawa">Adamawa</option>
               </select>
-              <select class="form-control">
-                <option value="cat">Select State</option>
-                <option value="cat">Abia</option>
-                <option value="cat">Adamawa</option>
-              </select>
-
             </div>
             <div class="d-grid">
-              <select class="form-control">
-                <option value="cat">Years of Experience in Shea</option>
-                <option value="cat1">1-2 Years</option>
-                <option value="cat2">3-5 Years</option>
-                <option value="cat2">5-10 Years</option>
-                <option value="cat2">10+ Years</option>
+              <select class="form-control" name="yearsofexperience">
+                <option value="">Years of Experience in Shea</option>
+                <option value="1-2">1-2 Years</option>
+                <option value="3-5">3-5 Years</option>
+                <option value="6-10">6-10 Years</option>
+                <option value="10+">10+ Years</option>
               </select>
               <div class="animated-checkbox">
                 <h6>Area of Expertise in Shea </h6>
