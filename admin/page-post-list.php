@@ -35,7 +35,7 @@ header('location:index.php');
             <h3 class="tile-title">All Post</h3>
             <div class="tile-body">
               <div class="table-responsive">
-                <table class="table table-hover table-bordered" id="memberlist">
+                <table class="table table-hover table-bordered" id="sampleTable">
                   <thead>
                     <tr>
                       <th>ID</th>
@@ -93,6 +93,10 @@ header('location:index.php');
       </div>
     </main>
     <!-- Essential javascripts for application to work-->
+    
     <?php
     include('includes/footer.php');
     ?>
+    <script type="text/javascript" src="js/plugins/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="js/plugins/dataTables.bootstrap.min.js"></script>
+    <script type="text/javascript">$('#sampleTable').DataTable();</script>
