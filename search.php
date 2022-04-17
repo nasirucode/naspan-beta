@@ -31,6 +31,11 @@ include('includes/header.php');
           <div class="col-lg-8 text11-content">
            <!-- Blog Post -->
             <?php 
+              if($_POST['searchtitle']!=''){
+                $st=$_SESSION['searchtitle']=$_POST['searchtitle'];
+              }
+              $st;
+
               if (isset($_GET['pageno'])) {
                 $pageno = $_GET['pageno'];
               } else {
@@ -43,7 +48,13 @@ include('includes/header.php');
               $total_rows = mysqli_fetch_array($result)[0];
               $total_pages = ceil($total_rows / $no_of_records_per_page);
 
-              $query=mysqli_query($con,"select tblposts.id as pid,tblposts.PostTitle as posttitle,tblposts.PostImage,tblposts.Category,tblposts.PostDetails, tblcategory.CategoryName as category,tblcategory.id as cid,tblsubcategory.Subcategory as subcategory,tblposts.PostDetails as postdetails,tblposts.PostingDate as postingdate,tblposts.PostUrl as url from tblposts left join tblcategory on tblcategory.id=tblposts.CategoryId left join  tblsubcategory on  tblsubcategory.SubCategoryId=tblposts.SubCategoryId where tblposts.Is_Active=1 order by tblposts.id desc  LIMIT $offset, $no_of_records_per_page");
+              $query=mysqli_query($con,"select tblposts.id as pid,tblposts.PostTitle as posttitle,tblposts.PostImage,tblposts.Category,tblposts.PostDetails, tblcategory.CategoryName as category,tblcategory.id as cid,tblsubcategory.Subcategory as subcategory,tblposts.PostDetails as postdetails,tblposts.PostingDate as postingdate,tblposts.PostUrl as url from tblposts left join tblcategory on tblcategory.id=tblposts.CategoryId left join  tblsubcategory on  tblsubcategory.SubCategoryId=tblposts.SubCategoryId where tblposts.PostTitle like '%$st%' and tblposts.Is_Active=1 order by tblposts.id desc  LIMIT $offset, $no_of_records_per_page");
+              $rowcount=mysqli_num_rows($query);
+              if($rowcount==0)
+               {
+               echo "No record found";
+               }
+              else {
               while ($row=mysqli_fetch_array($query)) {
             ?>
             <div class="item mt-5 pt-lg-3">
@@ -64,7 +75,7 @@ include('includes/header.php');
                 </div>
               </div>
             </div>
-            <?php } ?>
+            <?php }} ?>
             <!-- /Blog Post -->
 
             <!-- pagination -->
@@ -94,6 +105,21 @@ include('includes/header.php');
             <aside class="sidebar">
               <div class="sidebar-widget sidebar-blog-category">
 
+              <!-- <div class="textwidget mx-auto text-center">
+                <a href="#"> <img class="rounded-circle align-center img-fluid" src="assets/images/c1.jpg" alt="user_logo"></a>
+                       <div class="sidebar-title">
+                        <h4 class="mb-2 mt-3">Jack Harry</h4>
+                      </div>
+                <p class="text-center px-lg-4">Hi! I`m an authtor of this blog. Read our post - be in trend!</p>
+                  <div class="widget-social-icons mt-4">
+                    <ul class="column3 social m-0 p-0">
+                     
+                      <li><a href="#facebook" class="facebook"><span class="fa fa-facebook"></span></a></li>
+                      <li><a href="#twitter" class="twitter"><span class="fa fa-twitter"></span></a></li>
+                      <li><a href="#linkedin" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
+                    </ul>
+                  </div>
+              </div> -->
               </div>
               <!--Blog Category Widget-->
               <div class="sidebar-widget sidebar-blog-category">

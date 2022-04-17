@@ -2,6 +2,33 @@
 session_start();
 include('includes/config.php');
 include('includes/header.php');
+//Genrating CSRF Token
+if (empty($_SESSION['token'])) {
+  $_SESSION['token'] = bin2hex(random_bytes(32));
+ }
+ 
+ if(isset($_POST['submit']))
+ {
+   //Verifying CSRF Token
+ if (!empty($_POST['csrftoken'])) {
+     if (hash_equals($_SESSION['token'], $_POST['csrftoken'])) {
+ $name=$_POST['name'];
+ $email=$_POST['email'];
+ $comment=$_POST['comment'];
+ $postid=intval($_GET['nid']);
+ $st1='0';
+ $query=mysqli_query($con,"insert into tblcomments(postId,name,email,comment,status) values('$postid','$name','$email','$comment','$st1')");
+ if($query):
+   echo "<script>alert('comment successfully submit. Comment will be display after admin review ');</script>";
+   unset($_SESSION['token']);
+ else :
+  echo "<script>alert('Something went wrong. Please try again.');</script>";  
+ 
+ endif;
+ 
+ }
+ }
+ }
 ?>
 <body>
   <!--header-->
@@ -60,14 +87,14 @@ include('includes/header.php');
               <div class="comments-grids">
                 <div class="media-grid">
                   <div class="media">
-                    <a class="comment-img" href="#url"><img src="assets/images/naspan_user.jpg" class="img-fluid"
+                    <a class="comment-img" href="#"><img src="assets/images/naspan_user.jpg" class="img-fluid"
                         width="100px" alt="placeholder image"></a>
                     <div class="media-body comments-grid-right">
                       <h5>Musa Muhammed</h5>
                       <ul class="p-0 comment">
                         <li class="">June 17th, 2020 at 11:00 am</li>
                         <li>
-                          <a href="#comment" class="replay"> Reply</a>
+                          <!-- <a href="#comment" class="replay"> Reply</a> -->
                         </li>
                       </ul>
                       <p>Nice post.</p>
@@ -75,62 +102,31 @@ include('includes/header.php');
                     </div>
                   </div>
                 </div>
-                <div class="media-grid">
-                  <div class="media">
-                    <a class="comment-img" href="#url"><img src="assets/images/naspan_user.jpg" class="img-fluid"
-                        width="100px" alt="placeholder image"></a>
-                    <div class="media-body comments-grid-right">
-                      <h5>Aminu Ibrahim</h5>
-                      <ul class="p-0 comment">
-                        <li class="">June 17th, 2021 at 05:45 pm </li>
-                        <li>
-                          <a href="#comment" class="replay"> Reply</a>
-                        </li>
-                      </ul>
-                      <p>Nice
-                      </p>
-                      <div class="media mt-4 mb-0 border-0 px-0">
-                        <a class="comment-img" href="#url"><img src="assets/images/naspan_user.jpg" class="img-fluid"
-                            width="100px" alt="placeholder image"></a>
-                        <div class="media-body comments-grid-right">
-                          <h5>Prince George</h5>
-                          <ul class="p-0 comment">
-                            <li class="">June 17th, 2021 at 11:00 am</li>
-                            <li>
-                              <a href="#comment" class="replay"> Reply</a>
-                            </li>
-                          </ul>
-                          <p>Go NASPAN.</p>
-
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
               </div>
             </div>
             <div class="leave-comment-form" id="comment">
               <h3 class="aside-title">Add Your Comment</h3>
-              <form action="#" method="post">
+              <form method="post" name="Comment">
+              <input type="hidden" name="csrftoken" value="<?php echo htmlentities($_SESSION['token']); ?>" />
                 <div class="input-grids">
                   <div class="row">
-                    <div class="form-group col-lg-4">
-                      <input type="text" name="Name" class="form-control" placeholder="Name" required="">
+                    <div class="form-group col-lg-6">
+                      <input type="text" name="name" class="form-control" placeholder="Name" required="">
                     </div>
-                    <div class="form-group col-lg-4">
-                      <input type="email" name="Email" class="form-control" placeholder="Email" required="">
+                    <div class="form-group col-lg-6">
+                      <input type="email" name="email" class="form-control" placeholder="Email" required="">
                     </div>
-                    <div class="form-group col-lg-4">
+                    <!-- <div class="form-group col-lg-4">
                       <input type="text" name="Website" class="form-control" placeholder="Website">
-                    </div>
+                    </div> -->
                   </div>
                   <div class="form-group">
-                    <textarea name="Comment" class="form-control" placeholder="Your Comment" required=""></textarea>
+                    <textarea name="comment" class="form-control" placeholder="Your Comment" required=""></textarea>
                   </div>
                   
                 </div>
                 <div class="submit text-right">
-                  <button class="btn btn-style btn-primary">Post Comment
+                  <button class="btn btn-style btn-primary" name="submit" type="submit">Post Comment
                   </button></div>
               </form>
             </div>
@@ -139,85 +135,65 @@ include('includes/header.php');
           </div>
           <div class="sidebar-side col-lg-4 col-md-12 col-sm-12 mt-lg-0 mt-5">
             <aside class="sidebar">
-              <!-- <div class="sidebar-widget sidebar-blog-category">
+              <div class="sidebar-widget sidebar-blog-category">
 
-              <div class="textwidget mx-auto text-center">
-                <a href="#"> <img class="rounded-circle align-center img-fluid" src="assets/images/naspan_user.jpg" alt="user_logo" width="100px"></a>
-                       <div class="sidebar-title">
-                        <h4 class="mb-2 mt-3">Admin Admin</h4>
-                      </div>
-                <p class="text-center px-lg-4">Original </p>
-                  <div class="widget-social-icons mt-4">
-                    <ul class="column3 social m-0 p-0">
-                     
-                      <li><a href="#facebook" class="facebook"><span class="fa fa-facebook"></span></a></li>
-                      <li><a href="#twitter" class="twitter"><span class="fa fa-twitter"></span></a></li>
-                      <li><a href="#linkedin" class="linkedin"><span class="fa fa-linkedin"></span></a></li>
-                    </ul>
-                  </div>
               </div>
-              </div> -->
               <!--Blog Category Widget-->
               <div class="sidebar-widget sidebar-blog-category">
                 <div class="sidebar-title">
                   <h4>Search here</h4>
                 </div>
-              <form action="#" class="search-form" method="post">
-                <input type="search" name="search" placeholder="Search..." required="">
-                <button><span class="fa fa-search"></span></button>
+              <form action="search" class="search-form" method="post" name="search">
+                <input type="search" name="searchtitle" placeholder="Search..." required="">
+                <button type="submit"><span class="fa fa-search"></span></button>
               </form>
             </div>
+
+
               <!-- Popular Post Widget-->
               <div class="sidebar-widget popular-posts">
                 <div class="sidebar-title">
                   <h4>Latest Updates</h4>
                 </div>
-    
+                
+                <?php 
+                  $query=mysqli_query($con,"select tblposts.id as pid,tblposts.PostTitle as posttitle,tblposts.PostImage,tblposts.Category,tblposts.PostDetails, tblcategory.CategoryName as category,tblcategory.id as cid,tblsubcategory.Subcategory as subcategory,tblposts.PostDetails as postdetails,tblposts.PostingDate as postingdate,tblposts.PostUrl as url from tblposts left join tblcategory on tblcategory.id=tblposts.CategoryId left join  tblsubcategory on  tblsubcategory.SubCategoryId=tblposts.SubCategoryId where tblposts.Is_Active=1 order by tblposts.id desc  LIMIT 5");
+                  while ($row=mysqli_fetch_array($query)) {
+                ?>
                 <article class="post">
-                  <figure class="post-thumb"><img src="assets/images/NASPAN-Shea-nut.jpg" alt=""></figure>
-                  <div class="text"><a href="">Sustainable Shea production in Nigeria</a>
+                  <figure class="post-thumb"><img src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>"
+                        alt="<?php echo htmlentities($row['posttitle']);?>"></figure>
+                  <div class="text"><a href="blog-single?nid=<?php echo htmlentities($row['pid'])?>"><?php echo htmlentities($row['posttitle']);?></a>
                   </div>
-                  <div class="post-info">Sept. 4, 2021</div>
+                  <div class="post-info"><?php echo htmlentities($row['postingdate']);?></div>
                 </article>
-    
-                <article class="post">
-                  <figure class="post-thumb"><img src="assets/images//NASPAN-Shea-belt-nigeria.png" alt=""></figure>
-                  <div class="text"><a href="blog-single">Being The Communique Issued at the End
-                    </a></div>
-                  <div class="post-info">Sept. 1, 2021</div>
-                </article>
-    
-                <article class="post">
-                  <figure class="post-thumb"><img src="assets/images/NASPAN-president-and-aisha.jpeg" alt=""></figure>
-                  <div class="text"><a href="blog-single">NASPAN President Recieves Aisha Babangida</a>
-                  </div>
-                  <div class="post-info">Aug. 11, 2021</div>
-                </article>
+                <?php } ?>
+                
     
               </div>
               <!-- sidebar sticky -->
               <div class="sidebar-sticky">
                 <div class="sidebar-sticky-fix">
                   <!--Blog Category Widget-->
-           
-                  <!--Gallery Widget-->
+                
+
+                 
+
                   <!-- Tags Widget-->
-                  <div class="sidebar-widget popular-tags">
+                  <!-- <div class="sidebar-widget popular-tags">
                     <div class="sidebar-title">
-                      <h4>Our Tags</h4>
+                      <h4>Post Tag</h4>
                     </div>
                     <a href="#url">Agricultural</a>
                     <a href="#url">Organic</a>
                     <a href="#url">Farm</a>
                     <a href="#url">Dairy</a>
                     <a href="#url">Gargen</a>
-                    <a href="#url">Milk</a>
-                    <a href="#url">Eggs</a>
-                   
-                  </div>
-            
+
+                  </div> -->
+
                   <!-- Subscribe Widget-->
-            
+
                 </div>
               </div>
               <!-- //sidebar sticky -->
