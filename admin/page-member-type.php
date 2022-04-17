@@ -7,6 +7,25 @@ if(strlen($_SESSION['adminlogin'])==0)
   { 
 header('location:index.php');
 }
+if($_GET['action']='edit')
+  {
+if(isset($_POST['edit']))
+  {
+  
+    $membertypeid=intval($_GET['mtid']);
+    $membertype=$_POST['membertype'];
+    $fee=$_POST['fee'];
+    $query=mysqli_query($con,"update tblmembertype set memberType='$membertype', fee='$fee' where id='$membertypeid'");
+    if($query)
+    {
+    $msg="membertype Updated ";
+    // header('location:../page-member-type');
+    }
+    else{
+    $error="Something went wrong . Please try again.";    
+    } 
+  }
+}
 ?>
 
   <body class="app sidebar-mini">
@@ -63,14 +82,18 @@ header('location:index.php');
                     <td><?php echo $row['memberType'] ?></td>
                     <td><?php echo $row['fee'] ?></td>
                     <td>
-                    <button type="button" class="btn btn-primary"> 
-                        <i class="fa fa-edit" aria-hidden="true"></i>
-                        Edit
-                    </button>
-                    <button type="button" class="btn btn-danger"> 
-                        <i class="fa fa-trash" aria-hidden="true"></i>
-                        Delete
-                    </button>
+                      <a href="?mtid=<?php echo htmlentities($row['id']);?>&&action=edit" onclick="$('#edit-membertype').style.display='none'">
+                        <button type="button" class="btn btn-primary"> 
+                          <i class="fa fa-edit" aria-hidden="true"></i>
+                          Edit
+                        </button>
+                      </a>
+                      <a href="server/membertype-add.php?mtid=<?php echo htmlentities($row['id']);?>&&action=del" onclick="return confirm('Do you reaaly want to delete ?')" style="color:white;">
+                        <button type="button" class="btn btn-danger">
+                          <i class="fa fa-trash" aria-hidden="true"></i>
+                          Delete
+                        </button>
+                      </a>
                     </td>
                 </tr>
                 <?php $count = $count + 1; }  }?>
@@ -109,6 +132,43 @@ header('location:index.php');
           </div>
         </div>
       </div>
+      <div class="col-md-6" id="edit-membertype">
+        <div class="tile">
+
+          <div class="tile-title-w-btn">
+            <h3 class="title">Update Membership Type</h3>
+            <!-- <p><a class="btn btn-primary icon-btn" href=""><i class="fa fa-plus"></i> </a></p> -->
+          </div>
+          <div class="tile-body">
+            <?php
+              $membertypeid=intval($_GET['mtid']);
+              $query=mysqli_query($con,"select * from tblmembertype where id='$membertypeid'");
+              while($row=mysqli_fetch_array($query)){
+            ?>
+            <form action=""  method="post">
+              <div class="form-group">
+                <label class="control-label">Membership Type</label>
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputAmount">Member type</label>
+                  <div class="input-group">
+                    <input class="form-control" id="exampleInputAmount" name="membertype" type="text" placeholder="Member Type" value="<?php echo htmlentities($row['memberType']);?>">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label class="sr-only" for="exampleInputAmount">Fee (NGN)</label>
+                  <div class="input-group">
+                    <input class="form-control" id="exampleInputAmount" name="fee" type="number" placeholder="Membership Fee" value="<?php echo htmlentities($row['fee']);?>">
+                  </div>
+                </div>
+                <div class="form-group align-self-end">
+                  <button class="btn btn-primary" type="submit" name="edit"><i class="fa fa-plus"></i>Update</button>
+                </div>
+              </div>
+            </form>
+            <?php } ?>
+          </div>
+        </div>
+      </div>
       <div class="clearfix"></div>
     </div>
     
@@ -117,3 +177,4 @@ header('location:index.php');
   <?php
     include('includes/footer.php');
   ?>
+  

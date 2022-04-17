@@ -29,75 +29,61 @@ include('includes/header.php');
         <div class="row">
 
           <div class="col-lg-8 text11-content">
-            <div class="item">
-              <div class="card">
-                <div class="card-header p-0 position-relative border-0">
-                  <a href="blog-single">
-                    <img class="card-img-bottom d-block radius-image" src="assets/images/NASPAN-Shea-nut.jpg"
-                      alt="NASPAN Shea Nut">
-                  </a>
-                </div>
-                <div class="card-body p-0 blog-details">
-                  <h6 class="mt-4">Jan 1, 2022</h6>
-                  <a href="#admin" class="admin">- by Admin </a>
-                  <br>
-                  <a href="blog-single" class="blog-desc">Sustainable Shea production in Nigeria</a>
-                  <p>The National Shea Products Association of Nigeria (NASPAN) which is the umbrella body of all practitioners in the Shea sector value chain in Nigeria.</p>
-                    <a href="blog-single" class="btn btn-style btn-primary mt-lg-4 mt-3">Read more </a>
-                </div>
-              </div>
-            </div>
+           <!-- Blog Post -->
+            <?php 
+              if (isset($_GET['pageno'])) {
+                $pageno = $_GET['pageno'];
+              } else {
+                $pageno = 1;
+              }
+              $no_of_records_per_page = 8;
+              $offset = ($pageno-1) * $no_of_records_per_page;
+              $total_pages_sql = "SELECT COUNT(*) FROM tblposts";
+              $result = mysqli_query($con,$total_pages_sql);
+              $total_rows = mysqli_fetch_array($result)[0];
+              $total_pages = ceil($total_rows / $no_of_records_per_page);
+
+              $query=mysqli_query($con,"select tblposts.id as pid,tblposts.PostTitle as posttitle,tblposts.PostImage,tblposts.Category,tblposts.PostDetails, tblcategory.CategoryName as category,tblcategory.id as cid,tblsubcategory.Subcategory as subcategory,tblposts.PostDetails as postdetails,tblposts.PostingDate as postingdate,tblposts.PostUrl as url from tblposts left join tblcategory on tblcategory.id=tblposts.CategoryId left join  tblsubcategory on  tblsubcategory.SubCategoryId=tblposts.SubCategoryId where tblposts.Is_Active=1 order by tblposts.id desc  LIMIT $offset, $no_of_records_per_page");
+              while ($row=mysqli_fetch_array($query)) {
+            ?>
             <div class="item mt-5 pt-lg-3">
               <div class="card">
                 <div class="card-header p-0 position-relative border-0">
-                  <a href="blog-single">
-                    <img class="card-img-bottom d-block radius-image" src="assets/images/NASPAN-Shea-belt-nigeria.png"
-                      alt="Card image cap">
+                  <a href="blog-single?nid=<?php echo htmlentities($row['pid'])?>">
+                    <img class="card-img-bottom d-block radius-image" src="admin/postimages/<?php echo htmlentities($row['PostImage']);?>"
+                        alt="<?php echo htmlentities($row['posttitle']);?>">
                   </a>
                 </div>
                 <div class="card-body p-0 blog-details">
-                  <h6 class="mt-4">Jan 22, 2022</h6>
-                  <a href="#admin" class="admin">- by Admin </a>
+                  <h6 class="mt-4"><?php echo htmlentities($row['postingdate']);?></h6>
+                  <a href="#" class="admin">- by Admin </a>
                   <br>
-                  <a href="blog-single" class="blog-desc">Sustainable Shea production in Nigeria</a>
-                  <p>The National Shea Products Association of Nigeria (NASPAN) which is the umbrella body of all practitioners in the Shea sector value chain in Nigeria.</p>
-                    <a href="blog-single" class="btn btn-style btn-primary mt-lg-4 mt-3">Read more </a>
+                  <a href="blog-single?nid=<?php echo htmlentities($row['pid'])?>" class="blog-desc"><?php echo htmlentities($row['posttitle']);?></a>
+                  <!-- <p>As part of the build up towards the upcoming NASPAN Conference scheduled to hold from the 24-26th of August 2021, the President of NASAPAN, Mohammed Kontagora today, the 10th of August received the Chairperson of the Better Life for Rural Women in Africa her excellency, Aisha Babangida at the NASPAN Head office in Abuja.</p> -->
+                    <a href="blog-single?nid=<?php echo htmlentities($row['pid'])?>" class="btn btn-style btn-primary mt-lg-4 mt-3">Read more </a>
                 </div>
               </div>
             </div>
-            <div class="item mt-5 pt-lg-3">
-              <div class="card">
-                <div class="card-header p-0 position-relative border-0">
-                  <a href="blog-single">
-                    <img class="card-img-bottom d-block radius-image" src="assets/images/NASPAN-president-and-aisha.jpeg"
-                      alt="Card image cap">
-                  </a>
-                </div>
-                <div class="card-body p-0 blog-details">
-                  <h6 class="mt-4">Jan 22, 2022</h6>
-                  <a href="#admin" class="admin">- by Admin </a>
-                  <br>
-                  <a href="blog-single" class="blog-desc">NASPAN President Recieves Aisha Babangida</a>
-                  <p>As part of the build up towards the upcoming NASPAN Conference scheduled to hold from the 24-26th of August 2021, the President of NASAPAN, Mohammed Kontagora today, the 10th of August received the Chairperson of the Better Life for Rural Women in Africa her excellency, Aisha Babangida at the NASPAN Head office in Abuja.</p>
-                    <a href="blog-single" class="btn btn-style btn-primary mt-lg-4 mt-3">Read more </a>
-                </div>
-              </div>
-            </div>
+            <?php } ?>
+            <!-- /Blog Post -->
+
             <!-- pagination -->
             <div class="paginarions mt-5 pt-lg-5">
+            
               <ul class="pager">
-                <li class="pager__item pager__item--prev"><a class="pager__link" href="#"><span
-                      class="fa fa-chevron-left" aria-hidden="true"></span></a></li>
-                <li class="pager__item"><a class="pager__link" href="#">...</a></li>
-                <li class="pager__item active"><a class="pager__link" href="#">1</a></li>
-                <li class="pager__item "><a class="pager__link" href="#">2</a></li>
-                <li class="pager__item"><a class="pager__link" href="#">3</a></li>
-                <li class="pager__item"><a class="pager__link" href="#">4</a></li>
-                <li class="pager__item"><a class="pager__link" href="#">5</a></li>
-                <li class="pager__item"><a class="pager__link" href="#">6</a></li>
-                <li class="pager__item"><a class="pager__link" href="#">...</a></li>
-                <li class="pager__item pager__item--next"><a class="pager__link" href="#"><span
-                      class="fa fa-chevron-right" aria-hidden="true"></span></a></li>
+                <li class="<?php if($pageno <= 1){ echo 'disabled'; } ?> pager__item">
+                  <a href="<?php if($pageno <= 1){ echo '#'; } else { echo "?pageno=".($pageno - 1); } ?>" class="pager__link">
+                    <span class="fa fa-chevron-left" aria-hidden="true"></span>
+                  </a>
+                </li>
+                <?php for($pageno; $pageno<=$total_pages; $pageno++ ){?>
+                  <li class="pager__item active"><a class="pager__link" href="?pageno=<?php echo $pageno ?>"><?php echo $pageno; ?></a></li>
+                <?php } ?>
+                <li class="<?php if($pageno >= $total_pages){ echo 'disabled'; } ?> pager__item">
+                    <a href="<?php if($pageno >= $total_pages){ echo '#'; } else { echo "?pageno=".($pageno + 1); } ?> " class="pager__link">
+                      <span class="fa fa-chevron-right" aria-hidden="true"></span>
+                    </a>
+                </li>
               </ul>
             </div>
             <!-- //pagination -->

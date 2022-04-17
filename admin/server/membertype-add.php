@@ -20,5 +20,18 @@ if(isset($_POST['add']))
     } 
     
 }
+if($_GET['action']='del')
+{
+    $membertypeid=intval($_GET['mtid']);
+    $query=mysqli_query($con,"delete from tblmembertype where id='$membertypeid'");
+    if($query)
+    {
+    $msg="membertype deleted ";
+    header('location:../page-member-type');
+    }
+    else{
+    $error="Something went wrong . Please try again.";    
+    } 
+}
 
 ?>

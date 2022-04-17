@@ -44,7 +44,7 @@ header('location:index.php');
                       <th>State</th>
                       <th>Gender</th>
                       <th>Years Of Experience</th>
-                      <!-- <th></th> -->
+                      <th></th>
                     </tr>
                   </thead>
                   <tbody>
@@ -70,12 +70,14 @@ header('location:index.php');
                       <td><?php echo $row['state'] ?></td>
                       <td><?php echo $row['Gender'] ?></td>
                       <td><?php echo $row['YearsOfExperience'] ?> Years</td>
-                      <!-- <td>
-                        <button type="button" class="btn btn-primary"> 
-                          <i class="fa fa-edit" aria-hidden="true"></i>
-                          Edit
-                        </button>
-                      </td> -->
+                      <td>
+                        <a href="page-member-edit?mid=<?php echo htmlentities($row['memberid']);?>">
+                          <button type="button" class="btn btn-primary"> 
+                            <i class="fa fa-eye" aria-hidden="true"></i>
+                            View
+                          </button>
+                        </a>
+                      </td>
                     </tr>
                     <?php $count = $count + 1; }  }?>
                   </tbody>
