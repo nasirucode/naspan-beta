@@ -19,6 +19,7 @@ $hashpassword=($num['Password']); // Hashed password fething from database
 if ($password == $hashpassword) {
 $_SESSION['login']=$_POST['email'];
 $_SESSION['fname'] = $num['Firstname'];
+$_SESSION['fullname'] = $num['Firstname'].' '.$num['Lastname'];
     echo "<script type='text/javascript'> document.location = '../member_dashboard'; </script>";
   } else {
     echo "<script>alert('Wrong Password');</script>";

@@ -2,6 +2,10 @@
 session_start();
 include('includes/config.php');
 include('includes/header.php');
+if(!isset($_SESSION['login']))
+  {
+    echo "<script type='text/javascript'> document.location = 'signin'; </script>";
+  }
 ?>
 <body>
   <!--header-->

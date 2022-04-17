@@ -85,37 +85,46 @@ if (empty($_SESSION['token'])) {
             <div class="comments">
               <h3 class="aside-title ">Recent comments</h3>
               <div class="comments-grids">
+              <?php
+                $pid=intval($_GET['nid']); 
+                $sts=1;
+                $query=mysqli_query($con,"select name,comment,postingDate from  tblcomments where postId='$pid' and status='$sts'");
+                while ($row=mysqli_fetch_array($query)) {
+              ?>
                 <div class="media-grid">
                   <div class="media">
                     <a class="comment-img" href="#"><img src="assets/images/naspan_user.jpg" class="img-fluid"
                         width="100px" alt="placeholder image"></a>
                     <div class="media-body comments-grid-right">
-                      <h5>Musa Muhammed</h5>
+                      <h5><?php echo htmlentities($row['name']);?></h5>
                       <ul class="p-0 comment">
-                        <li class="">June 17th, 2020 at 11:00 am</li>
+                        <li class=""><?php echo htmlentities($row['postingDate']);?></li>
                         <li>
                           <!-- <a href="#comment" class="replay"> Reply</a> -->
                         </li>
                       </ul>
-                      <p>Nice post.</p>
+                      <p><?php echo htmlentities($row['comment']);?> </p>
 
                     </div>
                   </div>
                 </div>
+                <?php } ?>
               </div>
             </div>
             <div class="leave-comment-form" id="comment">
               <h3 class="aside-title">Add Your Comment</h3>
               <form method="post" name="Comment">
-              <input type="hidden" name="csrftoken" value="<?php echo htmlentities($_SESSION['token']); ?>" />
+              <input type="hidden" name="csrftoken" value='<?php echo $_SESSION["token"]?>'>
                 <div class="input-grids">
                   <div class="row">
                     <div class="form-group col-lg-6">
-                      <input type="text" name="name" class="form-control" placeholder="Name" required="">
+                      <input type="text" name="name" class="form-control" placeholder="Name" required=""
+                      <?php if(isset($_SESSION['login'])){ ?> value="<?php echo $_SESSION['fullname']; }?>">
                     </div>
                     <div class="form-group col-lg-6">
-                      <input type="email" name="email" class="form-control" placeholder="Email" required="">
-                    </div>
+                      <input type="email" name="email" class="form-control" placeholder="Email" required=""
+                      <?php if(isset($_SESSION['login'])){ ?> value="<?php echo $_SESSION['login']; }?>">
+                    </div> 
                     <!-- <div class="form-group col-lg-4">
                       <input type="text" name="Website" class="form-control" placeholder="Website">
                     </div> -->
